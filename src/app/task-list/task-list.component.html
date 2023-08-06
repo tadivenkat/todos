@@ -1,0 +1,37 @@
+<div>
+  <input
+    type="text"
+    placeholder="Enter A TODO Task"
+    (keydown.enter)="addTask(todoTask)"
+    #todoTask
+  />
+  <button (click)="addTask(todoTask)">Add TODO Task</button>
+</div>
+<div>
+  <h3>TODO Tasks</h3>
+  <table *ngIf="tasks.length > 0">
+    <thead>
+      <tr>
+        <td>Task</td>
+        <td>Remove</td>
+        <td>Update</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>
+          <pre [class.is-done]="task.isDone">{{ task.title }}</pre>
+        </td>
+        <td>
+          <button (click)="removeTask(task)">Remove This Task</button>
+        </td>
+        <td>
+          <button (click)="task.toggleIsDone()">
+            {{ task.isDone ? "Not Done" : "Done" }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="tasks.length == 0">You haven't added any TODO tasks yet.</p>
+</div>
